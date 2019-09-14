@@ -1,12 +1,12 @@
 <input
   #inputElementRef
-  [value] = "title"
-  (keyup.enter)="submitValue($event.target.value)"
+  [value] = ""
+  (keyup.enter)="submitValue($event.target.value); inputElementRef.value = ''"
   class="todo-input"
 >
 <p>
   <button
-    (click)="submitValue(inputElementRef.value)"
+    (click)="submitValue(inputElementRef.value); inputElementRef.value = ''"
     class="btn"
   >
     SAVE

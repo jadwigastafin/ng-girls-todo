@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseuUrl: 'http://localhost:3000/items'
 };
