@@ -1,14 +1,24 @@
-<input
-  #inputElementRef
-  [value] = ""
-  (keyup.enter)="submitValue($event.target.value); inputElementRef.value = ''"
-  class="todo-input"
+<form
+  #itemForm="ngForm"
+  (ngSubmit)="submitValue(itemForm)"
 >
-<p>
-  <button
-    (click)="submitValue(inputElementRef.value); inputElementRef.value = ''"
-    class="btn"
-  >
-    SAVE
-  </button>
-</p>
+
+  <div class="form-group">
+    <input
+      [(ngModel)]="title"
+      name="title"
+      #inputElementRef
+      [value] = ""
+      class="todo-input form-control"
+      required
+    >
+    <p>
+      <button
+        mat-raised-button
+        color="primary"
+      >
+        SAVE
+      </button>
+    </p>
+  </div>
+</form>

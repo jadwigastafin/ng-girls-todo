@@ -41,7 +41,7 @@ export class TodoListService {
         completed: item.completed || false
       })
       .subscribe(
-        () => {this.retrieveListFromDataBase(), console.log('ddd')}
+        () => {this.retrieveListFromDataBase()}
       );
   }
 

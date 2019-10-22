@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-input-button-unit',
@@ -14,7 +15,7 @@ export class InputButtonUnitComponent implements OnInit {
   // który będzie uzywany wewnatrz tego typu
   // teraz event będzie emitowany do komponentu rodzica przez Output
 
-  title = 'Hello';
+  title = '';
   title2: string;
   title3: string = 'Chce to wyswietlic';
 
@@ -24,11 +25,14 @@ export class InputButtonUnitComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitValue(newTitle: string) {
-    // this.title = newTitle;
-    // console.log(this.title, 'Tytuł zmienajacy sie na keyup');
-    // console.log(event, 'event');
-    this.submitNewItem.emit(newTitle);
+  submitValue(newTitle: NgForm) {
+    const updatedTitle = newTitle.value.title;
+    if (newTitle.valid) {
+      this.submitNewItem.emit(updatedTitle);
+      newTitle.resetForm();
+    } else {
+      alert('Form invalid');
+    }
   }
 
 }

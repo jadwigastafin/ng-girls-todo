@@ -1,0 +1,106 @@
+<p>User info:</p>
+
+<p> First name: {{gatheredUserInfo?.firstName}}
+  <button
+    (click)="editField('firstName')"
+  >
+  Edit this field
+  </button>
+</p>
+<input type="text" #testowyInput > <button
+  (click)="updateSpecificField(testowyInput.value)"> zrob to
+</button>
+
+<br>
+<button
+  type="button"
+  mat-raised-button
+  color="secondary"
+  (click)="fillDefault()"
+  >
+  Fill required fields
+</button>
+
+<form
+  [formGroup]="userFormGroup"
+  (ngSubmit)="onSubmit()"
+>
+
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      formControlName="firstName"
+      required
+      placeholder="first name"
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      color
+      formControlName="lastName"
+      required
+      placeholder="last name"
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      required
+      placeholder="email"
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="number"
+      matInput
+      formControlName="phone"
+      required
+      placeholder="phone"
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      formControlName="hobby"
+      placeholder="hobby"
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      formControlName="bestFriendName"
+      placeholder="best friend name"
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      type="date"
+      matInput
+      formControlName="dateOfBirth"
+      placeholder="date of birth"
+    >
+  </mat-form-field>
+
+  <button
+    type="submit"
+    mat-raised-button
+    color="secondary"
+    [disabled]="userFormGroup.invalid"
+  >
+    SUBMIT FORM
+  </button>
+
+</form>
