@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
 
 export interface UserInfo {
   firstName: string;
@@ -23,19 +23,22 @@ export class UserInfoComponent implements OnInit {
   email = 'ww@gmail.com';
   phone = 123123123;
 
-  userFormGroup = new FormGroup({
-    firstName: new FormControl('', [Validators.min(1), Validators.required]),
-    lastName: new FormControl('', [Validators.min(2), Validators.required]),
-    email: new FormControl('', Validators.email),
-    phone: new FormControl(''),
-    hobby: new FormControl('', Validators.min(2)),
-    bestFriendName: new FormControl(''),
-    dateOfBirth: new FormControl('')
+  userFormGroup = this.formBuilder.group({
+    firstName: ['', [Validators.min(1), Validators.required]],
+    lastName: ['', [Validators.min(2), Validators.required]],
+    email: ['', Validators.email],
+    phone: [''],
+    hobby: ['', Validators.min(2)],
+    bestFriendName: [''],
+    dateOfBirth: [''],
+    skills: this.formBuilder.array([
+      this.formBuilder.control('')
+    ])
   });
 
   gatheredUserInfo: UserInfo;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     // this.userFormGroup.valueChanges(() => {
@@ -65,6 +68,18 @@ export class UserInfoComponent implements OnInit {
 
   updateSpecificField(testowyInputvValue: string) {
     this.userFormGroup.controls.firstName.setValue(testowyInputvValue);
+  }
+
+  get skills() {
+    return this.userFormGroup.get('skills') as FormArray;
+  }
+
+  addSkills() {
+    this.skills.push(this.formBuilder.control(''));
+  }
+
+  removeSkills() {
+    this.skills.clear()
   }
 
 }

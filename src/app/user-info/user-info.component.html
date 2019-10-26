@@ -34,6 +34,9 @@
       required
       placeholder="first name"
     >
+    <mat-error *ngIf="userFormGroup.get('firstName').hasError('required')">
+      First name is required
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -45,6 +48,9 @@
       required
       placeholder="last name"
     >
+    <mat-error *ngIf="userFormGroup.get('lastName').hasError('required')">
+      Last name is required
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -94,6 +100,37 @@
     >
   </mat-form-field>
 
+ <div
+  formArrayName="skills">
+
+  <div *ngFor="let skill of skills.controls; let i = index">
+    <mat-form-field>
+      <input
+      type="text"
+      matInput
+      placeholder="skill {{i + 1}}"
+      [formControlName]="i"
+      >
+
+    </mat-form-field>
+  </div>
+
+  <button
+    (click)="addSkills()"
+    type="button"
+    mat-raised-button
+    color="primary">
+      Add skill
+  </button>
+  <button
+    (click)="removeSkills()"
+    type="button"
+    mat-raised-button
+    color="primary">
+      Remove skills
+  </button>
+ </div>
+
   <button
     type="submit"
     mat-raised-button
@@ -102,5 +139,6 @@
   >
     SUBMIT FORM
   </button>
+
 
 </form>

@@ -3,6 +3,9 @@ import { TodoItem } from '../interfaces/todo-item';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { RootState } from '../store';
+import { Store } from '@ngrx/store';
+import * as TodoListSelectors from '../store/todo-list/selectors';
 
 const defaultTodoList = [
   {title: 'install NodeJS'},
@@ -24,8 +27,14 @@ export class TodoListService {
 
   todoList: TodoItem[];
 
-  constructor(private http: HttpClient) {
-    this.retrieveListFromDataBase();
+  constructor(private http: HttpClient, private store: Store<RootState>) {
+    //this.retrieveListFromDataBase();
+    this.retreiveListFromStore();
+  }
+
+  retreiveListFromStore() {
+    this.store.select(TodoListSelectors.getList)
+      .subscribe(value => this.todoListSubject.next(value));
   }
 
   getTodoList() {
