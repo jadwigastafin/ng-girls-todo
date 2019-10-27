@@ -1,17 +1,5 @@
-<p>User info:</p>
+<p class="app-title">User info:</p>
 
-<p> First name: {{gatheredUserInfo?.firstName}}
-  <button
-    (click)="editField('firstName')"
-  >
-  Edit this field
-  </button>
-</p>
-<input type="text" #testowyInput > <button
-  (click)="updateSpecificField(testowyInput.value)"> zrob to
-</button>
-
-<br>
 <button
   type="button"
   mat-raised-button
@@ -20,6 +8,23 @@
   >
   Fill required fields
 </button>
+
+<p>
+  <button
+    (click)="editField('firstName')"
+    mat-raised-button
+  >
+    Edit this field
+  </button>
+  <span> First name: {{gatheredUserInfo?.firstName}}</span>
+</p>
+
+<!-- <input type="text" #testowyInput >
+<button
+  (click)="updateSpecificField(testowyInput.value)"> zrob to
+</button> -->
+
+<br>
 
 <form
   [formGroup]="userFormGroup"
@@ -45,7 +50,6 @@
       matInput
       color
       formControlName="lastName"
-      required
       placeholder="last name"
     >
     <mat-error *ngIf="userFormGroup.get('lastName').hasError('required')">
@@ -58,7 +62,6 @@
       type="email"
       matInput
       formControlName="email"
-      required
       placeholder="email"
     >
   </mat-form-field>
@@ -68,7 +71,6 @@
       type="number"
       matInput
       formControlName="phone"
-      required
       placeholder="phone"
     >
   </mat-form-field>
@@ -100,9 +102,7 @@
     >
   </mat-form-field>
 
- <div
-  formArrayName="skills">
-
+ <div formArrayName="skills">
   <div *ngFor="let skill of skills.controls; let i = index">
     <mat-form-field>
       <input
@@ -111,7 +111,6 @@
       placeholder="skill {{i + 1}}"
       [formControlName]="i"
       >
-
     </mat-form-field>
   </div>
 

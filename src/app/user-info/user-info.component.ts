@@ -25,10 +25,10 @@ export class UserInfoComponent implements OnInit {
 
   userFormGroup = this.formBuilder.group({
     firstName: ['', [Validators.min(1), Validators.required]],
-    lastName: ['', [Validators.min(2), Validators.required]],
+    lastName: [''],
     email: ['', Validators.email],
     phone: [''],
-    hobby: ['', Validators.min(2)],
+    hobby: [''],
     bestFriendName: [''],
     dateOfBirth: [''],
     skills: this.formBuilder.array([
